@@ -38,7 +38,7 @@
 @implementation RKSubclassedTestModel
 @end
 
-@interface RKTestAFHTTPClient : AFHTTPClient
+@interface RKTestAFHTTPClient : AFHTTPClient10
 @end
 
 @implementation RKTestAFHTTPClient
@@ -169,7 +169,7 @@
 
 - (void)testInitializationWithAFHTTPClientSetsNilAcceptHeaderValue
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
+    AFHTTPClient10 *client = [AFHTTPClient10 clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
     [client setDefaultHeader:@"Accept" value:@"this/that"];
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
     expect([manager defaultHeaders][@"Accept"]).to.equal(@"this/that");
@@ -177,7 +177,7 @@
 
 - (void)testDefersToAFHTTPClientParameterEncodingWhenInitializedWithAFHTTPClient
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
+    AFHTTPClient10 *client = [AFHTTPClient10 clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
     client.parameterEncoding = AFJSONParameterEncoding;
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
     expect([manager requestSerializationMIMEType]).to.equal(RKMIMETypeJSON);
@@ -185,7 +185,7 @@
 
 - (void)testDefaultsToFormURLEncodingForUnsupportedParameterEncodings
 {
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
+    AFHTTPClient10 *client = [AFHTTPClient10 clientWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
     client.parameterEncoding = AFPropertyListParameterEncoding;
     RKObjectManager *manager = [[RKObjectManager alloc] initWithHTTPClient:client];
     expect([manager requestSerializationMIMEType]).to.equal(RKMIMETypeFormURLEncoded);
@@ -683,7 +683,7 @@
 - (void)testChangingHTTPClient
 {
     RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://restkit.org"]];
-    manager.HTTPClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://google.com/"]];
+    manager.HTTPClient = [AFHTTPClient10 clientWithBaseURL:[NSURL URLWithString:@"http://google.com/"]];
     expect([manager.baseURL absoluteString]).to.equal(@"http://google.com/");
 }
 

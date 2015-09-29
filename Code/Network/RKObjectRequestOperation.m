@@ -31,7 +31,7 @@
 #import <Availability.h>
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-#import "AFNetworkActivityIndicatorManager.h"
+#import "AFNetworkActivityIndicatorManager10.h"
 #endif
 
 // Set Logging Component
@@ -196,14 +196,14 @@ NSString *const RKObjectRequestOperationMappingDidFinishUserInfoKey = @"mappingF
 static void RKIncrementNetworkActivityIndicator()
 {
     #if __IPHONE_OS_VERSION_MIN_REQUIRED
-        [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
+        [[AFNetworkActivityIndicatorManager10 sharedManager] incrementActivityCount];
     #endif
 }
 
 static void RKDecrementNetworkAcitivityIndicator()
 {
     #if __IPHONE_OS_VERSION_MIN_REQUIRED
-        [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+        [[AFNetworkActivityIndicatorManager10 sharedManager] decrementActivityCount];
     #endif
 }
 
@@ -466,7 +466,7 @@ static NSString *RKStringDescribingURLResponseWithData(NSURLResponse *response, 
 {
     __weak __typeof(self)weakSelf = self;    
     
-    [self.HTTPRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.HTTPRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation10 *operation, id responseObject) {
         if (weakSelf.isCancelled) {
             [weakSelf.stateMachine finish];
             return;
@@ -506,7 +506,7 @@ static NSString *RKStringDescribingURLResponseWithData(NSURLResponse *response, 
             weakSelf.mappingDidFinishDate = [NSDate date];
             [weakSelf.stateMachine finish];
         }];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation10 *operation, NSError *error) {
         RKLogError(@"Object request failed: Underlying HTTP request operation failed with error: %@", weakSelf.HTTPRequestOperation.error);
         weakSelf.error = weakSelf.HTTPRequestOperation.error;
         [weakSelf.stateMachine finish];

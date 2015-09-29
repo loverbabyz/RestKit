@@ -330,7 +330,7 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
     return RKMIMETypeFormURLEncoded;
 }
 
-@interface AFHTTPClient ()
+@interface AFHTTPClient10 ()
 @property (readonly, nonatomic, strong) NSURLCredential *defaultCredential;
 @end
 
@@ -348,7 +348,7 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
 
 @implementation RKObjectManager
 
-- (instancetype)initWithHTTPClient:(AFHTTPClient *)client
+- (instancetype)initWithHTTPClient:(AFHTTPClient10 *)client
 {
     self = [super init];
     if (self) {
@@ -384,8 +384,8 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
 
 + (RKObjectManager *)managerWithBaseURL:(NSURL *)baseURL
 {
-    RKObjectManager *manager = [[self alloc] initWithHTTPClient:[AFHTTPClient clientWithBaseURL:baseURL]];
-    [manager.HTTPClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    RKObjectManager *manager = [[self alloc] initWithHTTPClient:[AFHTTPClient10 clientWithBaseURL:baseURL]];
+    [manager.HTTPClient registerHTTPOperationClass:[AFJSONRequestOperation10 class]];
     [manager setAcceptHeaderWithMIMEType:RKMIMETypeJSON];
     manager.requestSerializationMIMEType = RKMIMETypeFormURLEncoded;
     return manager;
@@ -418,7 +418,7 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
     NSMutableURLRequest* request;
     if (parameters && !([method isEqualToString:@"GET"] || [method isEqualToString:@"HEAD"] || [method isEqualToString:@"DELETE"])) {
         // NOTE: If the HTTP client has been subclasses, then the developer may be trying to perform signing on the request
-        NSDictionary *parametersForClient = [self.HTTPClient isMemberOfClass:[AFHTTPClient class]] ? nil : parameters;
+        NSDictionary *parametersForClient = [self.HTTPClient isMemberOfClass:[AFHTTPClient10 class]] ? nil : parameters;
         request = [self.HTTPClient requestWithMethod:method path:path parameters:parametersForClient];
 		
         NSError *error = nil;
@@ -552,11 +552,11 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
 
 #pragma mark - Object Request Operations
 
-- (void)copyStateFromHTTPClientToHTTPRequestOperation:(AFHTTPRequestOperation *)operation
+- (void)copyStateFromHTTPClientToHTTPRequestOperation:(AFHTTPRequestOperation10 *)operation
 {
     operation.credential = self.HTTPClient.defaultCredential;
     operation.allowsInvalidSSLCertificate = self.HTTPClient.allowsInvalidSSLCertificate;
-#ifdef _AFNETWORKING_PIN_SSL_CERTIFICATES_
+#ifdef _AFNETWORKING10_PIN_SSL_CERTIFICATES_
     operation.SSLPinningMode = self.HTTPClient.defaultSSLPinningMode;
 #endif
 }

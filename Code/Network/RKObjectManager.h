@@ -22,7 +22,7 @@
 #import "RKPaginator.h"
 #import "RKMacros.h"
 
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking10.h"
 
 #ifdef _COREDATADEFINES_H
 #   if __has_include("RKCoreData.h")
@@ -285,7 +285,7 @@ RKMappingResult, RKRequestDescriptor, RKResponseDescriptor;
  @param client The AFNetworking HTTP client with which to initialize the receiver.
  @return The receiver, initialized with the given client.
  */
-- (instancetype)initWithHTTPClient:(AFHTTPClient *)client NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithHTTPClient:(AFHTTPClient10 *)client NS_DESIGNATED_INITIALIZER;
 
 ///------------------------------------------
 /// @name Accessing Object Manager Properties
@@ -294,7 +294,7 @@ RKMappingResult, RKRequestDescriptor, RKResponseDescriptor;
 /**
  The AFNetworking HTTP client with which the receiver makes requests.
  */
-@property (nonatomic, strong, readwrite) AFHTTPClient *HTTPClient;
+@property (nonatomic, strong, readwrite) AFHTTPClient10 *HTTPClient;
 
 /**
  The base URL of the underlying HTTP client.

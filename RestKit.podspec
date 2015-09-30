@@ -42,18 +42,17 @@ EOS
   end
 
   s.subspec 'Network' do |ns|
-    ns.source_files   = 'Code/Network.h', 'Code/Network'
+    ns.source_files   = 'Code/Network.h', 'Code/Network', 'Code/Network/AFNetworking10'
     ns.ios.frameworks = 'CFNetwork', 'Security', 'MobileCoreServices', 'SystemConfiguration'
     ns.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration'
     ns.dependency       'SOCKit'
-#ns.dependency       'AFNetworking', '~> 1.3.0'
     ns.dependency       'RestKit/ObjectMapping'
     ns.dependency       'RestKit/Support'
 
     ns.prefix_header_contents = <<-EOS
 #import <Availability.h>
 
-#define _AFNETWORKING_PIN_SSL_CERTIFICATES_
+#define _AFNETWORKING10_PIN_SSL_CERTIFICATES_
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
   #import <SystemConfiguration/SystemConfiguration.h>
@@ -79,7 +78,7 @@ EOS
     ts.prefix_header_contents = <<-EOS
 #import <Availability.h>
 
-#define _AFNETWORKING_PIN_SSL_CERTIFICATES_
+#define _AFNETWORKING10_PIN_SSL_CERTIFICATES_
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
   #import <SystemConfiguration/SystemConfiguration.h>

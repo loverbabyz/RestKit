@@ -28,6 +28,7 @@
 #import "RKObjectRequestOperation.h"
 #import "RKObjectParameterization.h"
 #import "RKPathMatcher.h"
+#import "AFNetworking10.h"
 
 #ifdef _COREDATADEFINES_H
 #import "RKManagedObjectRequestOperation.h"
